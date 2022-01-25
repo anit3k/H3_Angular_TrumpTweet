@@ -1,0 +1,36 @@
+<div class="card">
+    <div class="card-header text-center">
+        <h1>
+            {{pageTitle}}
+        </h1>
+    </div>
+    <div class="card-body">
+        <div class="col-md-2">Filter by:</div>
+        <div class="col-md-4">
+            <input type="text" [(ngModel)]='listFilter' />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Filtered by: {{listFilter}} </h4>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table" *ngIf="tweets.length">
+            <thead>
+                <tr>
+                    <th>Tweet</th>
+                    <th>Date</th>
+                    <th>Likes</th>      
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tweet of filteredTweets">
+                    <td>{{tweet.tweet}}</td>
+                    <td>{{tweet.date}}</td>
+                    <td>{{tweet.likes}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
