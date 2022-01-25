@@ -1,5 +1,5 @@
 export interface ITweet{
-    tweet: string;
+    text: string;
     date: string;
     likes: number;
 }
