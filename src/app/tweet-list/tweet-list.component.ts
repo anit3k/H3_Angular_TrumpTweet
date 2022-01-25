@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LocalApiService } from '../service/local-api.service';
 import { ITweet } from './ITweet';
@@ -8,7 +8,7 @@ import { ITweet } from './ITweet';
   templateUrl: './tweet-list.component.html',
   styleUrls: ['./tweet-list.component.css']
 })
-export class TweetListComponent implements OnInit {
+export class TweetListComponent implements OnInit, OnDestroy {
 
   // Fields
   pageTitle: string = 'Donald Trumps tweets!'  
@@ -16,9 +16,12 @@ export class TweetListComponent implements OnInit {
   tweets: ITweet[] = [];
   sub!: Subscription;
 
+  search: string = "";
+
   constructor(private tweetsService: LocalApiService) { 
     
   }
+  
 
   // search region #start
   private _listFilter: string = "";
@@ -28,6 +31,7 @@ export class TweetListComponent implements OnInit {
   set listFilter(value: string) {
     this._listFilter;
     this.filteredTweets = this.performFilter(value);
+    this.search = value;
   }
   performFilter(filterBy: string): ITweet[] {
     filterBy = filterBy.toLocaleLowerCase();
@@ -43,6 +47,13 @@ export class TweetListComponent implements OnInit {
         this.filteredTweets = this.tweets;
       }
     });
-  }  
+  }
 
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
+  public OnSearched(searchTerm: Event) {
+    console.log(searchTerm);
+  }
 }

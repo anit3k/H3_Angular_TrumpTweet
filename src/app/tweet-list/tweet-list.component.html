@@ -7,7 +7,7 @@
     <div class="card-body">
         <div class="col-md-2">Filter by:</div>
         <div class="col-md-4">
-            <input type="text" [(ngModel)]='listFilter' />
+            <input type="text" [(ngModel)]='listFilter'/>
         </div>
     </div>
     <div class="row">
@@ -28,8 +28,12 @@
             <tbody>
                 <tr *ngFor="let tweet of filteredTweets index as i">
                     <td scope="row">{{ i + 1 }}</td>
-                    <td style="width: 75%">{{tweet.text}}</td>
-                    <td>{{tweet.date}}</td>
+                    <td style="width: 75%"> 
+                        <!-- <p [innerHtml]=" tweet.text | highlightSearch: listFilter "></p> -->
+                        <div [innerHTML]=" tweet.text | highlightSearch : listFilter : 'Multi-Match' : false : 'yellow'"></div>
+                     <!-- {{ tweet.text }} -->
+                    </td>
+                    <td>{{tweet.date | date:"d/MM/yyyy H:mm"}}</td>
                     <td>{{tweet.likes}}</td>
                 </tr>
             </tbody>

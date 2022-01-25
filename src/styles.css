@@ -1,1 +1,10 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+
+.highlight {
+    background-color: violet;
+    font-weight: bold;
+  }
+
+  ::ng-deep .yellow{
+    background: yellow;
+  }
